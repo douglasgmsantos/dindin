@@ -1,18 +1,20 @@
 import 'package:dindin/constants/constants.dart';
+import 'package:dindin/src/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class SplashComponent extends StatefulWidget {
-  const SplashComponent({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<SplashComponent> createState() => _SplashComponentState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashComponentState extends State<SplashComponent> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2),
-        () => Navigator.of(context).pushReplacementNamed('/home'));
+        () => Get.offAllNamed(AppPages.homeRouter.route));
 
     super.initState();
   }

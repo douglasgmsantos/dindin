@@ -1,8 +1,8 @@
 import 'package:dindin/src/core/core.dart';
-import 'package:dindin/src/pages/auth/sign_in_page.dart';
-import 'package:dindin/src/pages/home/home_page.dart';
-import 'package:dindin/src/pages/splash/splash_page.dart';
+import 'package:dindin/src/routes/routes.dart';
+import 'package:dindin/src/pages/splash/view/splash_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,21 +13,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          colorScheme: darkColorScheme,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: const SplashPage(),
-        initialRoute: '/',
-        onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case "/home":
-              return MaterialPageRoute(builder: (_) => const HomePage());
-            case "/signin":
-              return MaterialPageRoute(builder: (_) => const SignInPage());
-          }
-          return null;
-        });
+    return GetMaterialApp(
+      theme: ThemeData(
+        colorScheme: darkColorScheme,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: const SplashPage(),
+      initialRoute: AppPages.splashRouter.route,
+      getPages: AppPages.pages,
+    );
   }
 }

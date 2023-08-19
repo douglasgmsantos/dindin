@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HomeComponent extends StatefulWidget {
-  const HomeComponent({super.key});
+class BasePage extends StatefulWidget {
+  const BasePage({super.key});
 
   @override
-  State<HomeComponent> createState() => _HomeComponentState();
+  State<BasePage> createState() => _BasePageState();
 }
 
-class _HomeComponentState extends State<HomeComponent> {
+class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
