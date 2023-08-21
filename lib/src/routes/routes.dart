@@ -6,10 +6,10 @@ import 'model/page_router_model.dart';
 
 abstract class AppPages {
   static PageRouterModel splashRouter = SplashRouter.pageRouter;
-  static PageRouterModel homeRouter = HomeRouter.pageRouter;
+  static PageRouterModel baseRouter = BaseRouter.pageRouter;
 
   static final pages = <GetPage>[
     splashRouter.getPage(),
-    homeRouter.getPage(),
+    baseRouter.getPage(),
   ];
 }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 const primaryColor = MaterialColor(0x16DB65, {
-  50: Color.fromRGBO(15, 5, 140, 0.1),
-  100: Color.fromRGBO(15, 5, 140, 0.1),
-  200: Color.fromRGBO(15, 5, 140, 0.2),
-  300: Color.fromRGBO(15, 5, 140, 0.3),
-  400: Color.fromRGBO(15, 5, 140, 0.4),
-  500: Color.fromRGBO(15, 5, 140, 0.5),
-  600: Color.fromRGBO(15, 5, 140, 0.6),
-  700: Color.fromRGBO(15, 5, 140, 0.7),
-  800: Color.fromRGBO(15, 5, 140, 0.8),
-  900: Color.fromRGBO(15, 5, 140, 1),
+  50: Color(0x0016db65),
+  100: Color(0x0016db65),
+  200: Color(0x0016db65),
+  300: Color(0x0016db65),
+  400: Color(0x0016db65),
+  500: Color(0x0016db65),
+  600: Color(0x0016db65),
+  700: Color(0x0016db65),
+  800: Color(0x0016db65),
+  900: Color(0x0016db65),
 });
 
 const secondaryColor = MaterialColor(0xFF1AA6EF, {

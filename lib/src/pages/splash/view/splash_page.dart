@@ -14,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2),
-        () => Get.offAllNamed(AppPages.homeRouter.route));
+        () => Get.offAllNamed(AppPages.baseRouter.route));
 
     super.initState();
   }
@@ -25,7 +25,6 @@ class _SplashPageState extends State<SplashPage> {
       child: Scaffold(
         body: Container(
           alignment: Alignment.center,
-          decoration: const BoxDecoration(color: Colors.black),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

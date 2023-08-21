@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MainApp());
 }
 
@@ -16,6 +18,8 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(
         colorScheme: darkColorScheme,
+        useMaterial3: true,
+        fontFamily: 'Montserrat',
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashPage(),

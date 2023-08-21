@@ -1,66 +1,59 @@
-import 'package:dindin/src/core/styles/colors.dart';
+import 'package:dindin/src/core/styles/hex_color.dart';
 import 'package:flutter/material.dart';
 
-const darkColorScheme = ColorScheme(
-  brightness: Brightness.dark,
-  primary: primaryColor,
-  onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFFC6ECFF),
-  onPrimaryContainer: Color(0xFF04283B),
-  secondary: Color(0xFF04283B),
-  onSecondary: Color(0xFFFFFFFF),
-  secondaryContainer: Color(0xFFC6ECFF),
-  onSecondaryContainer: Color(0xFF042739),
-  tertiary: Color(0xFFC6ECFF),
-  onTertiary: Color(0xFFFFFFFF),
-  tertiaryContainer: Color(0xFFC6ECFF),
-  onTertiaryContainer: Color(0xFF042739),
-  error: Color(0xFFB3261E),
-  onError: Color(0xFFFFFFFF),
-  errorContainer: Color(0xFFF9DEDC),
-  onErrorContainer: Color(0xFF410E0B),
-  outline: Color(0xFF79747E),
-  surface: Color(0xFFFBFBFB),
-  onSurface: Color(0xFF1D1B20),
-  onSurfaceVariant: Color(0xFF49454F),
-  inverseSurface: Color(0xFF322F35),
-  onInverseSurface: Color(0xFFF5EFF7),
-  inversePrimary: Color(0xFFF4B1A4),
-  shadow: Color(0xFF000000),
-  outlineVariant: Color(0xFFF1EDF5),
-  scrim: Color(0xFF000000),
-  background: Colors.black,
-  onBackground: Colors.white,
-);
+// ignore: slash_for_doc_comments
+/**
+GUIA DE CORES
+--- primary - Cor base primária
+--- onPrimary - E aplicada ao conteúdo (ícones, texto, etc.) que fica no topo do primário
+--- primaryContainer - é aplicado a elementos que precisam de menos ênfase que o primário
+--- onPrimaryContainer -  é aplicado ao conteúdo (ícones, texto etc.) que fica sobre o contêiner principal
+ * 
+ */
 
-const lightColorScheme = ColorScheme(
-  brightness: Brightness.light,
-  primary: secondaryColor,
-  onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFFC6ECFF),
-  onPrimaryContainer: Color(0xFF04283B),
-  secondary: Color(0xFF04283B),
-  onSecondary: Color(0xFFFFFFFF),
-  secondaryContainer: Color(0XFFC6ECFF),
-  onSecondaryContainer: Color(0xFF042739),
-  tertiary: Color(0xFFC6ECFF),
-  onTertiary: Color(0xFFFFFFFF),
-  tertiaryContainer: Color(0xFFC6ECFF),
-  onTertiaryContainer: Color(0xFF042739),
-  error: Color(0xFFB3261E),
-  onError: Color(0xFFFFFFFF),
-  errorContainer: Color(0xFFF9DEDC),
-  onErrorContainer: Color(0xFF410E0B),
-  outline: Color(0XFF79747E),
-  surface: Color(0xFFFBFBFB),
-  onSurface: Color(0xFF1D1B20),
-  onSurfaceVariant: Color(0xFF49454F),
-  inverseSurface: Color(0xFF322F35),
-  onInverseSurface: Color(0xFFF5EFF7),
-  inversePrimary: Color(0xFFF4B1A4),
-  shadow: Color(0xFF000000),
-  outlineVariant: Color(0xFFF1EDF5),
-  scrim: Color(0xFF000000),
-  background: Colors.white,
-  onBackground: Colors.black,
+ColorScheme darkColorScheme = ColorScheme(
+  brightness: Brightness.dark,
+
+  //primary
+  primary: HexColor("#16DB65"),
+  onPrimary: HexColor("#0d2818"),
+  primaryContainer: HexColor("#058c42"),
+  onPrimaryContainer: Colors.grey.shade300,
+  inversePrimary: Colors.grey.shade300,
+
+  //secondary
+  secondary: HexColor("#04283B"),
+  onSecondary: HexColor("#FFFFFF"),
+  secondaryContainer: HexColor("#C6ECFF"),
+  onSecondaryContainer: HexColor("#042739"),
+
+  //tertiary
+  tertiary: HexColor("#C6ECFF"),
+  onTertiary: HexColor("#FFFFFF"),
+  tertiaryContainer: HexColor("#C6ECFF"),
+  onTertiaryContainer: HexColor("#042739"),
+
+  //error
+  error: HexColor("#B3261E"),
+  onError: HexColor("#FFFFFF"),
+  errorContainer: HexColor("#F9DEDC"),
+  onErrorContainer: HexColor("#410E0B"),
+
+  //outline
+  outline: HexColor("#F1EDF5"),
+  outlineVariant: HexColor("#79747E"),
+
+  // surface
+  surface: HexColor("#161616"),
+  onSurface: Colors.grey.shade300,
+
+  inverseSurface: Colors.grey.shade300,
+  onInverseSurface: HexColor("#161616"),
+
+  //
+  shadow: HexColor("#000000"),
+  scrim: HexColor("#000000"),
+
+  background: Colors.grey.shade900,
+  onBackground: Colors.grey.shade300,
 );
