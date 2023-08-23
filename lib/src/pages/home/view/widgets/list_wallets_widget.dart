@@ -1,4 +1,3 @@
-import 'package:dindin/src/pages/home/view/widgets/button_action_widget.dart';
 import 'package:flutter/material.dart';
 
 class ListWalletsWidget extends StatelessWidget {
@@ -8,8 +7,8 @@ class ListWalletsWidget extends StatelessWidget {
     required this.onChanged,
   });
 
-  final ButtonActionType typeSelected;
-  final void Function(ButtonActionType) onChanged;
+  final String typeSelected;
+  final void Function(String) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -19,48 +18,29 @@ class ListWalletsWidget extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(15),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Expanded(
-            child: Text(
-              "Resumo da Carteira",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Expanded(
-            child: DropdownMenu(
-                inputDecorationTheme: const InputDecorationTheme(
-                  constraints: BoxConstraints(
-                    maxWidth: 190,
-                  ),
-                  outlineBorder: BorderSide(width: 0),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
+      child: DropdownButton(
+          underline: const SizedBox(),
+          isExpanded: true,
+          value: typeSelected,
+          onChanged: (value) {
+            onChanged(value!);
+          },
+          items: List.of(["Principal"])
+              .map(
+                (wallet) => DropdownMenuItem<String>(
+                  value: wallet,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(wallet),
+                      const Icon(Icons.wallet),
+                    ],
                   ),
                 ),
-                initialSelection: typeSelected,
-                onSelected: (value) {
-                  onChanged(value!);
-                },
-                dropdownMenuEntries: List.of([
-                  ButtonActionType.balance,
-                  ButtonActionType.income,
-                  ButtonActionType.outcome,
-                ])
-                    .map(
-                      (type) => DropdownMenuEntry<ButtonActionType>(
-                        leadingIcon: Icon(type.icon),
-                        value: type,
-                        label: type.description,
-                      ),
-                    )
-                    .toList()),
-          ),
-        ],
-      ),
+              )
+              .toList()),
     );
   }
 }

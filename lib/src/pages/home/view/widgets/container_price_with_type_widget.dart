@@ -1,17 +1,15 @@
-import 'package:dindin/src/pages/home/view/widgets/button_action_widget.dart';
 import 'package:dindin/src/utils/formatValue.dart';
 import 'package:flutter/material.dart';
 
 class ContainerPriceWithTypeWidget extends StatelessWidget {
-  const ContainerPriceWithTypeWidget(
-      {super.key,
-      required this.description,
-      required this.value,
-      required this.buttonActionType});
+  const ContainerPriceWithTypeWidget({
+    super.key,
+    required this.description,
+    required this.value,
+  });
 
   final String description;
   final double value;
-  final ButtonActionType buttonActionType;
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +44,18 @@ class ContainerPriceWithTypeWidget extends StatelessWidget {
                           Text(
                             description,
                             style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.amber),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.amber,
+                            ),
                           ),
-                          Text(formatValue.priceToCurrency(value),
-                              style: const TextStyle(fontSize: 22)),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            formatValue.priceToCurrency(value),
+                            style: const TextStyle(fontSize: 22),
+                          ),
                         ],
                       ),
                     ),
