@@ -15,7 +15,7 @@ class ListWalletsWidget extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(15),
