@@ -1,7 +1,7 @@
 import 'package:dindin/constants/constants.dart';
 import 'package:dindin/src/pages/home/controller/home_controller.dart';
 import 'package:dindin/src/pages/home/view/widgets/container_price_with_type_widget.dart';
-import 'package:dindin/src/pages/home/view/widgets/list_type_transaction_widget.dart';
+import 'package:dindin/src/pages/home/view/widgets/list_wallets_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,15 +30,16 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.all(Constants.paddingPageDefault),
         child: GetBuilder<HomeController>(
           builder: (controller) {
-            return ListView(
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                ListTypeTransactionWidget(
+                ListWalletsWidget(
                   onChanged: controller.changeButtonAction,
                   typeSelected: controller.buttonActionType,
                 ),
                 ContainerPriceWithTypeWidget(
                   description: controller.buttonActionType.description,
-                  value: 100,
+                  value: 898,
                   buttonActionType: controller.buttonActionType,
                 ),
               ],

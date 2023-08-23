@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 enum ButtonActionType {
   income(
     name: "income",
-    description: "Saldo",
+    description: "Recebidos",
     color: Colors.green,
     icon: Icons.arrow_circle_up,
   ),
   outcome(
     name: "outcome",
-    description: "Despesas",
+    description: "A pagar",
     color: Colors.red,
     icon: Icons.arrow_circle_down,
   ),
   balance(
     name: "balance",
-    description: "Balanço",
+    description: "Saldo em carteira",
     color: Colors.yellow,
     icon: Icons.wallet,
   );
