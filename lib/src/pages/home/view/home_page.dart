@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dindin/constants/constants.dart';
 import 'package:dindin/src/pages/home/controller/home_controller.dart';
 import 'package:dindin/src/pages/home/view/widgets/container_price_with_type_widget.dart';
@@ -12,7 +14,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: Container(
@@ -29,31 +30,40 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: size.height,
-          width: size.width,
-          padding: const EdgeInsets.all(Constants.paddingPageDefault),
-          child: GetBuilder<HomeController>(
-            builder: (controller) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListWalletsWidget(
-                    onChanged: controller.changeWallet,
-                    typeSelected: controller.walletSelected,
-                  ),
-                  ContainerPriceWithTypeWidget(
-                    description: controller.walletSelected,
-                    value: 898,
-                  ),
-                  const ListTransactionByCategory(),
-                  const Expanded(child: ListTransactionsRecents())
-                ],
-              );
-            },
-          ),
-        ),
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.all(Constants.paddingPageDefault),
+            sliver: SliverCrossAxisGroup(
+              slivers: [
+                SliverMainAxisGroup(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: GetBuilder<HomeController>(
+                        builder: (controller) {
+                          return Column(
+                            children: [
+                              ListWalletsWidget(
+                                onChanged: controller.changeWallet,
+                                typeSelected: controller.walletSelected,
+                              ),
+                              ContainerPriceWithTypeWidget(
+                                description: controller.walletSelected,
+                                value: 898,
+                              ),
+                              const ListTransactionByCategory(),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    const ListTransactionsRecents()
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

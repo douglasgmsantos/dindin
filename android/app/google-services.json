@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395818610269",
+    "project_id": "dindin-94d4e",
+    "storage_bucket": "dindin-94d4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395818610269:android:be8fcab129a9a62e4067b4",
+        "android_client_info": {
+          "package_name": "br.com.dindin.dindin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2ExyAEQxNcHNW6Kn9tTUQLAE3qmy6OhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
