@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '395818610269',
     projectId: 'dindin-94d4e',
     storageBucket: 'dindin-94d4e.appspot.com',
+    iosClientId: '395818610269-fn2vh6m0vdc4o17snacdn3lluf83h2pq.apps.googleusercontent.com',
     iosBundleId: 'br.com.dindin.dindin',
   );
 }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dindin/constants/constants.dart';
 import 'package:dindin/src/pages/home/controller/home_controller.dart';
 import 'package:dindin/src/pages/home/view/widgets/container_price_with_type_widget.dart';

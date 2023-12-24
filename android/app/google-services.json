@@ -12,7 +12,12 @@
           "package_name": "br.com.dindin.dindin"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "395818610269-5ul5i0t0k5cgh2hd1smmka9n6a1h61hh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC2ExyAEQxNcHNW6Kn9tTUQLAE3qmy6OhY"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395818610269-5ul5i0t0k5cgh2hd1smmka9n6a1h61hh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "395818610269-fn2vh6m0vdc4o17snacdn3lluf83h2pq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.dindin.dindin"
+              }
+            }
+          ]
         }
       }
     }

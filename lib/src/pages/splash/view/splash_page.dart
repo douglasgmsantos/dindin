@@ -13,8 +13,12 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2),
-        () => Get.offAllNamed(AppPages.baseRouter.route));
+    Future.delayed(
+      const Duration(seconds: 2),
+      () => Get.offAllNamed(
+        AppPages.signUpRouter.route,
+      ),
+    );
 
     super.initState();
   }

@@ -1,4 +1,4 @@
-import 'package:dindin/src/utils/formatValue.dart';
+import 'package:dindin/src/utils/format_value.dart';
 import 'package:flutter/material.dart';
 
 class ListTransactionByCategory extends StatelessWidget {
