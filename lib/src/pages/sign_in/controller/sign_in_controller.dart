@@ -1,12 +1,12 @@
 import 'package:dindin/src/core/dependency_injection/dependency_injection.dart';
-import 'package:dindin/src/core/services/authentication/firebase_authentication.dart';
+import 'package:dindin/src/core/services/authentication/authentication_service.dart';
 import 'package:dindin/src/core/state_management/state_management.dart';
 import 'package:dindin/src/pages/sign_in/state/user_state.dart';
 import 'package:dindin/src/shared/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 
 class SignInController {
-  final _authentication = DindinInjector.I.get<FirebaseAuthentication>();
+  final _authentication = DindinInjector.I.get<AuthenticationService>();
   final _userController = DindinInjector.I.get<UserController>();
 
   ValueNotifier userState = ValueNotifier<DindinState>(UserInitialState());

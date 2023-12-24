@@ -1,11 +1,11 @@
-import 'package:dindin/src/core/services/authentication/dto/create_user_dto.dart';
-import 'package:dindin/src/core/services/authentication/firebase_authentication.dart';
+import 'package:dindin/src/core/services/authentication/model/create_user.dart';
+import 'package:dindin/src/core/services/authentication/authentication_service.dart';
 import 'package:dindin/src/core/state_management/state_management.dart';
 import 'package:dindin/src/pages/sign_up/state/create_user_state.dart';
 import 'package:flutter/material.dart';
 
 class SignUpController {
-  final FirebaseAuthentication _authentication = FirebaseAuthentication();
+  final AuthenticationService _authentication = AuthenticationService();
 
   final ValueNotifier nameState =
       ValueNotifier<TextEditingController>(TextEditingController());
@@ -26,10 +26,9 @@ class SignUpController {
       String email = emailState.value.text;
       String password = passwordState.value.text;
 
-      var createUserDTO =
-          CreateUserDTO(name: name, email: email, password: password);
+      var createUser = CreateUser(name: name, email: email, password: password);
       var response = await _authentication.createUserWithEmailAndPassword(
-        createUserDTO: createUserDTO,
+        createUser: createUser,
       );
 
       if (response.$2 != null) {

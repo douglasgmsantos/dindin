@@ -1,5 +1,5 @@
-import 'package:dindin/src/core/services/authentication/dto/create_user_dto.dart';
-import 'package:dindin/src/core/services/authentication/dto/user.dart';
+import 'package:dindin/src/core/services/authentication/model/create_user.dart';
+import 'package:dindin/src/core/services/authentication/model/user.dart';
 
 abstract class AuthenticationRepository {
   Future<(User?, String?)> signInWithEmailAndPassword({
@@ -7,7 +7,7 @@ abstract class AuthenticationRepository {
     required String password,
   });
   Future<(bool, String?)> createUserWithEmailAndPassword({
-    required CreateUserDTO createUserDTO,
+    required CreateUser createUser,
   });
   Future<void> logout();
 }

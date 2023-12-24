@@ -1,16 +1,16 @@
-class CreateUserDTO {
+class CreateUser {
   final String name;
   final String password;
   final String email;
 
-  CreateUserDTO({
+  CreateUser({
     required this.name,
     required this.password,
     required this.email,
   });
 
-  factory CreateUserDTO.fromJson(Map<String, dynamic> json) {
-    return CreateUserDTO(
+  factory CreateUser.fromJson(Map<String, dynamic> json) {
+    return CreateUser(
       name: json['name'],
       password: json['password'],
       email: json['email'],

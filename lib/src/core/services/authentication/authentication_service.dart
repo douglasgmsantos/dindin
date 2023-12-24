@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dindin/src/core/errors/failure.dart';
-import 'package:dindin/src/core/services/authentication/dto/create_user_dto.dart';
-import 'package:dindin/src/core/services/authentication/dto/user.dart'
+import 'package:dindin/src/core/services/authentication/model/create_user.dart';
+import 'package:dindin/src/core/services/authentication/model/user.dart'
     as user_entity;
 import 'package:dindin/src/core/services/authentication/repositories/authentication_repository.dart';
+import 'package:dindin/src/core/services/wallet/model/wallet_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseAuthentication implements AuthenticationRepository {
+class AuthenticationService implements AuthenticationRepository {
   final FirebaseAuth _authFirebaseDataSource = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
-  FirebaseAuthentication();
+  AuthenticationService();
 
   @override
   Future<(user_entity.User?, String?)> signInWithEmailAndPassword({
@@ -51,7 +52,7 @@ class FirebaseAuthentication implements AuthenticationRepository {
 
   @override
   Future<(bool, String?)> createUserWithEmailAndPassword({
-    required CreateUserDTO createUserDTO,
+    required CreateUser createUser,
   }) async {
     bool result = false;
     String? message;
@@ -59,8 +60,8 @@ class FirebaseAuthentication implements AuthenticationRepository {
     try {
       final response =
           await _authFirebaseDataSource.createUserWithEmailAndPassword(
-        email: createUserDTO.email,
-        password: createUserDTO.password,
+        email: createUser.email,
+        password: createUser.password,
       );
 
       if (response.user == null) {
@@ -69,7 +70,7 @@ class FirebaseAuthentication implements AuthenticationRepository {
 
       final userEntity = user_entity.User(
         uid: response.user!.uid,
-        name: createUserDTO.name,
+        name: createUser.name,
         email: response.user!.email!,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
@@ -77,9 +78,18 @@ class FirebaseAuthentication implements AuthenticationRepository {
       );
 
       await _firebaseFirestore
-          .collection(response.user!.uid)
+          .collection(userEntity.uid)
           .doc("user")
           .set(userEntity.toMap());
+
+      await _firebaseFirestore.collection(userEntity.uid).doc("wallet").set(
+            WalletModel(
+              balance: 0,
+              income: 0,
+              outcome: 0,
+              transactions: [],
+            ).toJson(),
+          );
 
       result = true;
     } on Failure catch (error) {

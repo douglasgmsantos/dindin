@@ -1,4 +1,4 @@
-import 'package:dindin/src/core/services/authentication/dto/user.dart';
+import 'package:dindin/src/core/services/authentication/model/user.dart';
 import 'package:flutter/material.dart';
 
 class UserController {
