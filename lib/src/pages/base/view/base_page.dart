@@ -1,7 +1,6 @@
 import 'package:dindin/src/pages/base/controller/navigation_controller.dart';
 import 'package:dindin/src/pages/home/view/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({super.key});
@@ -14,15 +13,18 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final navigationController = Get.find<NavigationController>();
+    final navigationController = NavigationController();
 
     return Scaffold(
-      bottomNavigationBar: Obx(() => BottomNavigationBar(
+      bottomNavigationBar: ValueListenableBuilder(
+        valueListenable: navigationController.currentIndex,
+        builder: (context, currentIndexValue, child) {
+          return BottomNavigationBar(
             backgroundColor: colorScheme.surface,
             selectedItemColor: colorScheme.onSurface,
             unselectedItemColor: colorScheme.onSurface.withAlpha(100),
             type: BottomNavigationBarType.fixed,
-            currentIndex: navigationController.currentIndex,
+            currentIndex: currentIndexValue,
             onTap: (index) => navigationController.navigatePageView(index),
             items: [
               const BottomNavigationBarItem(
@@ -66,12 +68,14 @@ class _BasePageState extends State<BasePage> {
                     Icons.settings,
                   ))
             ],
-          )),
+          );
+        },
+      ),
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: navigationController.pageController,
         children: [
-          const HomePage(),
+          HomePage(),
           Container(
             color: Colors.amber,
           ),

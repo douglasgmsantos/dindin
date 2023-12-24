@@ -3,8 +3,8 @@ import 'package:dindin/src/routes/model/page_router_model.dart';
 
 class SignInRouter {
   static PageRouterModel pageRouter = PageRouterModel(
+    id: 'sign-in',
     route: "/sign-in",
     widget: SignInPage(),
-    bindings: [],
   );
 }

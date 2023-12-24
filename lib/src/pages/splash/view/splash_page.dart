@@ -1,7 +1,6 @@
 import 'package:dindin/constants/constants.dart';
 import 'package:dindin/src/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -15,9 +14,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     Future.delayed(
       const Duration(seconds: 2),
-      () => Get.offAllNamed(
-        AppPages.signUpRouter.route,
-      ),
+      () => Navigator.of(context).pushNamed(AppPages.signInRouter.id),
     );
 
     super.initState();

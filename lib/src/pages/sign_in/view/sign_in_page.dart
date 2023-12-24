@@ -3,7 +3,6 @@ import 'package:dindin/src/pages/sign_in/controller/sign_in_controller.dart';
 import 'package:dindin/src/pages/sign_in/state/user_state.dart';
 import 'package:dindin/src/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});
@@ -12,9 +11,15 @@ class SignInPage extends StatelessWidget {
 
   authenticate() {
     controller.authenticate(
-      email: "douglasgabrielmota@gmail.com",
+      email: "douglas@gmail.com",
       password: "123456",
     );
+  }
+
+  onRedirectHome(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Navigator.of(context).pushNamed(AppPages.baseRouter.id);
+    });
   }
 
   @override
@@ -24,13 +29,16 @@ class SignInPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(
-              onPressed: authenticate,
-              child: const Text("Logar"),
-            ),
             DindinValueListenableBuilder<UserSuccessState, UserErrorState>(
               valueListenable: controller.userState,
+              onInit: (context, value, child) {
+                return TextButton(
+                  onPressed: authenticate,
+                  child: const Text("Logar"),
+                );
+              },
               onSuccess: (context, profileState, _) {
+                onRedirectHome(context);
                 return Container();
               },
               onLoading: (context, value, child) {
@@ -47,6 +55,10 @@ class SignInPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      TextButton(
+                        onPressed: authenticate,
+                        child: const Text("Logar"),
+                      ),
                       Text(value.message),
                     ],
                   ),
@@ -56,9 +68,7 @@ class SignInPage extends StatelessWidget {
             TextButton(
               child: const Text("Crie seu perfil"),
               onPressed: () {
-                Get.toNamed(
-                  AppPages.signUpRouter.route,
-                );
+                Navigator.of(context).pushNamed(AppPages.signUpRouter.id);
               },
             ),
           ],

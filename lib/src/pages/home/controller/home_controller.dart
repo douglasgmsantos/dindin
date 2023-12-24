@@ -1,25 +1,9 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-class HomeController extends GetxController {
-  late Rx<String> _walletSelected;
-
-  String get walletSelected => _walletSelected.value;
-
-  @override
-  void onInit() {
-    super.onInit();
-
-    _initHome(walletSelected: "Principal");
-  }
-
-  void _initHome({
-    required String walletSelected,
-  }) {
-    _walletSelected = walletSelected.obs;
-  }
+class HomeController {
+  final ValueNotifier walletSelectedState = ValueNotifier<String>("Principal");
 
   void changeWallet(String newWallet) {
-    _walletSelected.value = newWallet;
-    update();
+    walletSelectedState.value = newWallet;
   }
 }

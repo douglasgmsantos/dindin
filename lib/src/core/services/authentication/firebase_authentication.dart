@@ -38,11 +38,13 @@ class FirebaseAuthentication implements AuthenticationRepository {
       } else if (e.code == 'wrong-password') {
         return (null, 'Usuário ou senha não encontrado, tente novamente!');
       } else {
+        print(e);
         return (null, 'Ocorreu um erro ao tentar logar, tente novamente!');
       }
     } on Failure catch (e) {
       return (null, e.message);
     } catch (e) {
+      print(e);
       return (null, 'Ocorreu um erro ao tentar logar, tente novamente!');
     }
   }

@@ -5,10 +5,11 @@ import 'package:dindin/src/pages/home/view/widgets/list_transaction_by_category_
 import 'package:dindin/src/pages/home/view/widgets/list_transactions_recents_widgets.dart';
 import 'package:dindin/src/pages/home/view/widgets/list_wallets_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final HomeController homeController = HomeController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +38,19 @@ class HomePage extends StatelessWidget {
                 SliverMainAxisGroup(
                   slivers: [
                     SliverToBoxAdapter(
-                      child: GetBuilder<HomeController>(
-                        builder: (controller) {
+                      child: ValueListenableBuilder(
+                        valueListenable: homeController.walletSelectedState,
+                        builder: (context, value, child) {
                           return Column(
                             children: [
                               ListWalletsWidget(
-                                onChanged: controller.changeWallet,
-                                typeSelected: controller.walletSelected,
+                                onChanged: homeController.changeWallet,
+                                typeSelected:
+                                    homeController.walletSelectedState.value,
                               ),
                               ContainerPriceWithTypeWidget(
-                                description: controller.walletSelected,
+                                description:
+                                    homeController.walletSelectedState.value,
                                 value: 898,
                               ),
                               const ListTransactionByCategory(),
