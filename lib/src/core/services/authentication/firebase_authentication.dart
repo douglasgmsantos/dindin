@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dindin/src/core/errors/failure.dart';
-import 'package:dindin/src/core/services/authentication/dto/user_dto.dart';
+import 'package:dindin/src/core/services/authentication/dto/create_user_dto.dart';
+import 'package:dindin/src/core/services/authentication/dto/user.dart'
+    as user_entity;
 import 'package:dindin/src/core/services/authentication/repositories/authentication_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -11,7 +13,7 @@ class FirebaseAuthentication implements AuthenticationRepository {
   FirebaseAuthentication();
 
   @override
-  Future<(UserEntity?, String?)> signInWithEmailAndPassword({
+  Future<(user_entity.User?, String?)> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -31,27 +33,25 @@ class FirebaseAuthentication implements AuthenticationRepository {
           .get()
           .then((DocumentSnapshot doc) => doc.data() as Map<String, dynamic>);
 
-      return (UserEntity.fromJson(user), null);
+      return (user_entity.User.fromJson(user), null);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return (null, 'Usuário ou senha não encontrado, tente novamente!');
       } else if (e.code == 'wrong-password') {
         return (null, 'Usuário ou senha não encontrado, tente novamente!');
       } else {
-        print(e);
         return (null, 'Ocorreu um erro ao tentar logar, tente novamente!');
       }
     } on Failure catch (e) {
       return (null, e.message);
     } catch (e) {
-      print(e);
       return (null, 'Ocorreu um erro ao tentar logar, tente novamente!');
     }
   }
 
   @override
   Future<(bool, String?)> createUserWithEmailAndPassword({
-    required UserEntity user,
+    required CreateUserDTO createUserDTO,
   }) async {
     bool result = false;
     String? message;
@@ -59,20 +59,21 @@ class FirebaseAuthentication implements AuthenticationRepository {
     try {
       final response =
           await _authFirebaseDataSource.createUserWithEmailAndPassword(
-        email: user.email!,
-        password: user.password!,
+        email: createUserDTO.email,
+        password: createUserDTO.password,
       );
 
       if (response.user == null) {
         throw Failure("Não foi possível realizar a autenticação!");
       }
 
-      final userEntity = UserEntity(
-        uid: response.user?.uid,
-        name: user.name,
-        email: response.user?.email,
+      final userEntity = user_entity.User(
+        uid: response.user!.uid,
+        name: createUserDTO.name,
+        email: response.user!.email!,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
+        isActive: true,
       );
 
       await _firebaseFirestore

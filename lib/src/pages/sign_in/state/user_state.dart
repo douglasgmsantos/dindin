@@ -1,4 +1,3 @@
-import 'package:dindin/src/core/services/authentication/dto/user_dto.dart';
 import 'package:dindin/src/core/state_management/state_management.dart';
 
 class UserInitialState extends DindinInitialState {}
@@ -12,6 +11,5 @@ class UserErrorState extends DindinErrorState {
 }
 
 class UserSuccessState extends DindinSuccessState {
-  final UserEntity user;
-  UserSuccessState(this.user);
+  UserSuccessState();
 }

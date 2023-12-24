@@ -1,4 +1,4 @@
-import 'package:dindin/src/core/services/authentication/dto/user_dto.dart';
+import 'package:dindin/src/core/services/authentication/dto/create_user_dto.dart';
 import 'package:dindin/src/core/services/authentication/firebase_authentication.dart';
 import 'package:dindin/src/core/state_management/state_management.dart';
 import 'package:dindin/src/pages/sign_up/state/create_user_state.dart';
@@ -26,9 +26,11 @@ class SignUpController {
       String email = emailState.value.text;
       String password = passwordState.value.text;
 
-      var user = UserEntity(name: name, email: email, password: password);
-      var response =
-          await _authentication.createUserWithEmailAndPassword(user: user);
+      var createUserDTO =
+          CreateUserDTO(name: name, email: email, password: password);
+      var response = await _authentication.createUserWithEmailAndPassword(
+        createUserDTO: createUserDTO,
+      );
 
       if (response.$2 != null) {
         createUserState.value = CreateUserErrorState(
