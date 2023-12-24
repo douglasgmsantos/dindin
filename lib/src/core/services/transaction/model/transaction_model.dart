@@ -4,6 +4,7 @@ class TransactionModel {
   final String description;
   final DateTime dtReference;
   final String type;
+  final String uid;
 
   TransactionModel({
     required this.name,
@@ -11,6 +12,7 @@ class TransactionModel {
     required this.description,
     required this.dtReference,
     required this.type,
+    required this.uid,
   });
 
   // Convert TransactionModel to a JSON map
@@ -22,6 +24,7 @@ class TransactionModel {
       'dt_reference':
           dtReference.toIso8601String(), // Format DateTime as ISO 8601 string
       'type': type,
+      'uid': uid,
     };
   }
 
@@ -29,11 +32,12 @@ class TransactionModel {
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
     return TransactionModel(
       name: json['name'] as String,
-      value: json['value'] as double,
+      value: double.parse(json['value'].toString()),
       description: json['description'] as String,
       dtReference: DateTime.parse(json['dt_reference']
           as String), // Parse ISO 8601 string back to DateTime
       type: json['type'] as String,
+      uid: json['uid'] as String,
     );
   }
 }

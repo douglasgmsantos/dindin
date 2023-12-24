@@ -9,5 +9,8 @@ abstract class AuthenticationRepository {
   Future<(bool, String?)> createUserWithEmailAndPassword({
     required CreateUser createUser,
   });
+
+  Future<User> getUser({required String uid});
+
   Future<void> logout();
 }

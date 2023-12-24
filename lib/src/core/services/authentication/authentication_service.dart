@@ -6,6 +6,7 @@ import 'package:dindin/src/core/services/authentication/model/user.dart'
 import 'package:dindin/src/core/services/authentication/repositories/authentication_repository.dart';
 import 'package:dindin/src/core/services/wallet/model/wallet_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 
 class AuthenticationService implements AuthenticationRepository {
   final FirebaseAuth _authFirebaseDataSource = FirebaseAuth.instance;
@@ -82,14 +83,20 @@ class AuthenticationService implements AuthenticationRepository {
           .doc("user")
           .set(userEntity.toMap());
 
-      await _firebaseFirestore.collection(userEntity.uid).doc("wallet").set(
-            WalletModel(
-              balance: 0,
-              income: 0,
-              outcome: 0,
-              transactions: [],
-            ).toJson(),
-          );
+      final uuidWallet = const Uuid().v4();
+      await _firebaseFirestore.collection(userEntity.uid).doc("wallets").set(
+        {
+          uuidWallet: WalletModel(
+            uid: uuidWallet,
+            name: "Principal",
+            active: true,
+            balance: 0,
+            income: 0,
+            outcome: 0,
+            transactions: [],
+          ).toJson()
+        },
+      );
 
       result = true;
     } on Failure catch (error) {
@@ -103,6 +110,8 @@ class AuthenticationService implements AuthenticationRepository {
             "Essa senha é fraca, tenta adicionar uma senha mais forte."
       };
       message = errors[error.code] ?? error.message;
+    } on Exception catch (e) {
+      message = e.toString();
     }
 
     return (result, message);
@@ -111,5 +120,16 @@ class AuthenticationService implements AuthenticationRepository {
   @override
   Future<void> logout() {
     return _authFirebaseDataSource.signOut();
+  }
+
+  @override
+  Future<user_entity.User> getUser({required String uid}) async {
+    final user = await _firebaseFirestore
+        .collection(uid)
+        .doc("user")
+        .get()
+        .then((DocumentSnapshot doc) => doc.data() as Map<String, dynamic>);
+
+    return user_entity.User.fromJson(user);
   }
 }

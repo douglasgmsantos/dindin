@@ -1,5 +1,7 @@
 import 'package:dindin/constants/constants.dart';
+import 'package:dindin/src/pages/splash/controller/splash_controller.dart';
 import 'package:dindin/src/routes/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -10,12 +12,24 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final FirebaseAuth _authFirebaseDataSource = FirebaseAuth.instance;
+  final SplashController splashController = SplashController();
+
   @override
   void initState() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () => Navigator.of(context).pushNamed(AppPages.signInRouter.id),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _authFirebaseDataSource.authStateChanges().listen(
+        (User? user) async {
+          if (user == null) {
+            Navigator.of(context).pushNamed(AppPages.signInRouter.id);
+          } else {
+            await splashController.setUser(uid: user.uid);
+            // ignore: use_build_context_synchronously
+            Navigator.of(context).pushNamed(AppPages.baseRouter.id);
+          }
+        },
+      );
+    });
 
     super.initState();
   }

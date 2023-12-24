@@ -1,15 +1,14 @@
+import 'package:dindin/src/core/services/wallet/model/wallet_model.dart';
 import 'package:dindin/src/utils/format_value.dart';
 import 'package:flutter/material.dart';
 
 class ContainerPriceWithTypeWidget extends StatelessWidget {
   const ContainerPriceWithTypeWidget({
     super.key,
-    required this.description,
-    required this.value,
+    required this.walletSelected,
   });
 
-  final String description;
-  final double value;
+  final WalletModel walletSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class ContainerPriceWithTypeWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            description,
+                            walletSelected.name,
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
@@ -53,7 +52,9 @@ class ContainerPriceWithTypeWidget extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            formatValue.priceToCurrency(value),
+                            formatValue.priceToCurrency(
+                              walletSelected.balance,
+                            ),
                             style: const TextStyle(fontSize: 22),
                           ),
                         ],
@@ -71,11 +72,15 @@ class ContainerPriceWithTypeWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     LabelOutcomeIncome(
-                      value: formatValue.priceToCurrency(100000.0),
+                      value: formatValue.priceToCurrency(
+                        walletSelected.income,
+                      ),
                       color: Colors.green,
                     ),
                     LabelOutcomeIncome(
-                      value: formatValue.priceToCurrency(-10000.0),
+                      value: formatValue.priceToCurrency(
+                        walletSelected.outcome,
+                      ),
                       color: Colors.red,
                     ),
                   ],

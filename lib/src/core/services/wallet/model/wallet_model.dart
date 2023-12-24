@@ -1,39 +1,45 @@
-import 'package:dindin/src/core/services/wallet/model/transaction_model.dart';
-
 class WalletModel {
+  final String uid;
+  final bool active;
+  final String name;
   final double balance;
   final double income;
   final double outcome;
-  final List<TransactionModel> transactions;
+  final List<String> transactions;
 
   WalletModel({
+    required this.uid,
+    required this.active,
+    required this.name,
     required this.balance,
     required this.income,
     required this.outcome,
     required this.transactions,
   });
 
-  factory WalletModel.fromJson(Map<String, dynamic> json) {
-    return WalletModel(
-      balance: json['balance'] ?? 0,
-      income: json['income'] ?? 0,
-      outcome: json['outcome'] ?? 0,
-      transactions: (json['transactions'] as List)
-          .map(
-            (transactionsJson) => TransactionModel.fromJson(transactionsJson),
-          )
-          .toList(),
-    );
-  }
-
+  // Convert WalletModel to a JSON map
   Map<String, dynamic> toJson() {
     return {
+      'uid': uid,
+      'active': active,
+      'name': name,
       'balance': balance,
       'income': income,
       'outcome': outcome,
-      'transactions': transactions
-          .map((transaction) => transaction.toJson())
-          .toList(), // Map transactions to their JSON representations
+      'transactions': transactions,
     };
+  }
+
+  // Create WalletModel from a JSON map
+  factory WalletModel.fromJson(Map<String, dynamic> json) {
+    return WalletModel(
+      uid: json['uid'] as String,
+      active: json['active'] as bool,
+      name: json['name'] as String,
+      balance: double.parse(json['balance'].toString()),
+      income: double.parse(json['income'].toString()),
+      outcome: double.parse(json['outcome'].toString()),
+      transactions: json['transactions'].cast<String>(),
+    );
   }
 }

@@ -75,7 +75,7 @@ class _BasePageState extends State<BasePage> {
         physics: const NeverScrollableScrollPhysics(),
         controller: navigationController.pageController,
         children: [
-          HomePage(),
+          const HomePage(),
           Container(
             color: Colors.amber,
           ),

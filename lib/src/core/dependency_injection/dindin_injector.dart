@@ -43,6 +43,10 @@ class DindinInjector {
     return GetIt.instance.dropScope(scopeName);
   }
 
+  T retrive<T extends Object>() {
+    return GetIt.instance.get<T>();
+  }
+
   T get<T extends Object>({String? instanceName, param1, param2, Type? type}) {
     return GetIt.instance.get<T>(
         instanceName: instanceName, param1: param1, param2: param2, type: type);
